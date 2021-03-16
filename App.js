@@ -8,7 +8,7 @@ import {
 } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance'
-import DK from './darkTheme'
+import DT from './darkTheme'
 
 function HomeScreen({ navigation }) {
   return (
@@ -64,7 +64,7 @@ function MainStackScreen() {
 
 function App() {
   const scheme = useColorScheme()
-  const MyDarkTheme = DK()
+  const MyDarkTheme = DT()
 
   return (
     <NavigationContainer theme={scheme === 'dark' ? MyDarkTheme : DefaultTheme}>
