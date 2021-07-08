@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import {
   NavigationContainer,
   DefaultTheme,
@@ -9,56 +9,25 @@ import {
 import { createStackNavigator } from '@react-navigation/stack'
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance'
 import DT from './darkTheme'
+import myDarkTheme from './darkTheme'
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
-      <Button
-        onPress={() => navigation.navigate('MyModal')}
-        title='Open Modal'
-      />
-      <Button
-        onPress={() => navigation.navigate('Details')}
-        title='Details Screen'
-      />
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text style={{ color: 'white' }}>Home Screen</Text>
+      </View>
+    </SafeAreaView>
   )
 }
 
-function ModalScreen({ navigation }) {
-  const { colors } = useTheme()
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Text style={{ fontSize: 30, color: colors.text }}>This is a modal!</Text>
-      <Button onPress={() => navigation.goBack()} title='Dismiss' />
-    </View>
-  )
-}
+const HomeStack = createStackNavigator()
 
-function DetailsScreen() {
+function HomeScrenStack({ navigation }) {
   return (
-    <View>
-      <Text>Details</Text>
-    </View>
-  )
-}
-
-const MainStack = createStackNavigator()
-const RootStack = createStackNavigator()
-
-function MainStackScreen() {
-  return (
-    <MainStack.Navigator>
-      <MainStack.Screen name='Home' component={HomeScreen} />
-      <MainStack.Screen name='Details' component={DetailsScreen} />
-    </MainStack.Navigator>
+    <HomeStack.Navigator>
+      <HomeStack.Screen name='Home' component={HomeScreen}></HomeStack.Screen>
+    </HomeStack.Navigator>
   )
 }
 
@@ -68,10 +37,7 @@ function App() {
 
   return (
     <NavigationContainer theme={scheme === 'dark' ? MyDarkTheme : DefaultTheme}>
-      <RootStack.Navigator mode='modal' headerMode='none'>
-        <RootStack.Screen name='Main' component={MainStackScreen} />
-        <RootStack.Screen name='MyModal' component={ModalScreen} />
-      </RootStack.Navigator>
+      <HomeScrenStack />
     </NavigationContainer>
   )
 }
