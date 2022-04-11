@@ -1,16 +1,14 @@
 import React from 'react'
 import { View, Text, SafeAreaView } from 'react-native'
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { useColorScheme } from 'react-native-appearance'
-import DT from './darkTheme'
 
-//A tester screen
+//A tester screen with some inline styling
 function HomeScreen() {
   return (
     <View style={{ flex: 1 }}>
       <SafeAreaView>
-        <Text style={{ color: 'white' }}>Home Screen</Text>
+        <Text style={{ color: 'green' }}>Home Screen</Text>
       </SafeAreaView>
     </View>
   )
@@ -20,7 +18,7 @@ function HomeScreen() {
 const HomeStack = createStackNavigator()
 
 //component prop will take in screens you create
-function HomeScreenStack({ navigation }) {
+function HomeScreenStack() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name='Home' component={HomeScreen}></HomeStack.Screen>
@@ -29,12 +27,10 @@ function HomeScreenStack({ navigation }) {
 }
 
 //STARTING POINT OF YOUR APP -> notice we are passing in our STACK NAVIGATOR
+//NavigationContainer is responsible for bringing our parent most navigator to your device i.e. HomeScreeStack
 function App() {
-  const scheme = useColorScheme()
-  const MyDarkTheme = DT()
-
   return (
-    <NavigationContainer theme={scheme === 'dark' ? MyDarkTheme : DefaultTheme}>
+    <NavigationContainer>
       <HomeScreenStack />
     </NavigationContainer>
   )
